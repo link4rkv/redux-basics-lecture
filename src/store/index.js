@@ -1,26 +1,28 @@
-import { createStore, applyMiddleware } from 'redux';
-import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { createStore } from "redux";
 
-const authReducer = (state = { isAuthenticated: false }, action) => {
-  if (action.type === 'login') {
+const authState = {
+  isAuthenticated: false,
+  cart: []
+}
+
+const authReducer = (state = authState, action) => {
+  if(action.type === "login") {
     return {
-      isAuthenticated: true
-    };
+      isAuthenticated: true,
+      cart: []
+    }
   }
-  
-  if (action.type === 'logout') {
+
+  if(action.type === "logout") {
     return {
-      isAuthenticated: false
-    };
+      isAuthenticated: false,
+      cart: []
+    }
   }
 
   return state;
 }
 
-const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
-
-const store = createStore(authReducer, composedEnhancer);
+const store = createStore(authReducer);
 
 export default store;
-

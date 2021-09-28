@@ -5,21 +5,17 @@ import { useSelector, useDispatch } from 'react-redux';
 const Header = (props) => {
   const dispatch = useDispatch();
   const isAuth = useSelector(state => state.isAuthenticated);
+
+  const logoutHandler = () => {
+    dispatch({
+      type: "logout"
+    })
+  }
   
-  const logoutHandler = (event) => {
-    event.preventDefault();
-
-    dispatch({ type: 'logout' });
-  }
-
-  const addUser = () => {
-    props.addUserForm();
-  }
-
   return (
     <header className = {classes.header}>
-      <h1>Redux Auth</h1>
-      {!isAuth && <button onClick={addUser}>Register</button>}
+      <h1>Redux Implementation</h1>
+      {!isAuth && <button>Register</button>}
       {isAuth &&
         <nav>
           <ul>
@@ -34,7 +30,7 @@ const Header = (props) => {
             </li>
           </ul>
         </nav>
-      }
+      } 
     </header>
   )
 }
